@@ -14,7 +14,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private string charColor;
 
-
     public bool moveRight, moveLeft, jump, change;
     public int arrayIndex = 0, cnt = 0;
     
@@ -35,11 +34,13 @@ public class PlayerMove : MonoBehaviour
         if (moveRight)
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
         if (moveLeft)
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
         }
 
         if (jump) {
@@ -67,4 +68,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag != charColor)
+            Debug.Log("GAME OVER DUDE");
+    }
 } //Class
